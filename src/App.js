@@ -90,10 +90,6 @@ function App() {
         <Route path="/signupcompany" element={<Signupcompany />} />
         <Route path="/aboutus" element={<Aboutus />} />
 
-
-
-
-
         <Route
           path="/admin/manage"
           element={
@@ -122,9 +118,7 @@ function App() {
             <Route path="/paymentcompany/" element={<Paymentcompany />} />
             <Route path="/postjob" element={<CreatePost />} />
             <Route path="/postjob/:id" element={<EditPost />} />
-
             <Route path="/contactcompany" element={<Contactcompany />} />
-
             <Route path="/companypost" element={<CompanyPost />} />
 
             <Route path="/applicantcompany" element={<Applicantcompany />} />

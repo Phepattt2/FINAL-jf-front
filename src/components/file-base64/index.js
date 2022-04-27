@@ -47,6 +47,7 @@ export default function FileBase64({ multiple, onDone }) {
       type="file"
       onChange={handleChange}
       multiple={multiple}
+      required
     />
   );
 }

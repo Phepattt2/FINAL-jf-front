@@ -17,9 +17,6 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/contactcompany" className="mr-20 no-underline text-[#000000] hover:text-[#FFFFFF] cursor-pointer text-lg font-sans">
-              ติดต่อสอบถาม
-            </Link>
           </li>
         </ul>
       </div>

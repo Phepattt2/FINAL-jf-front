@@ -42,7 +42,7 @@ function ProfileStudent() {
   useEffect(() => {
     fetchProvincesName()
     fetchCollegesName()
-    loadData(user.token);
+    loadData(user.token)
     }, []);
   
     const loadData = (authtoken) => {
@@ -73,7 +73,6 @@ function ProfileStudent() {
     updateUser(user.token, values)
       .then((res) => {
         console.log(res.data);
-        loadData(user.token);
       })
       .catch((err) => {
         console.log(err);
@@ -207,15 +206,14 @@ function ProfileStudent() {
           <img
             className="h-36 w-36"
             img
-            required
             src={values.img === "" ? Profile : values.img}
             alt="profile"
-
             // รูปภาพ
           />
         </div>
         <div className="flex justify-center w-64 mx-72">
         <MyFileBase64
+                            required
                             mutiple = {false} 
                             onDone = {({base64})=>setValues ({...values,
                             img:base64})} 

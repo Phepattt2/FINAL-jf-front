@@ -144,8 +144,9 @@ const ApplicantCompany = () => {
 
                 <div className="flex space-x-2">
                   คณะ
-                  <div className="text-black border-2 border-gray-300 rounded-md block w-[255px] p-3 my-2 ml-5"></div>
+                  <div className="text-black border-2 border-gray-300 rounded-md block w-[255px] p-3 my-2 ml-5">
                   {item.user.faculty}
+                  </div>
                 </div>
 
                 <div className="flex space-x-2">

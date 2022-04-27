@@ -76,7 +76,7 @@ export default function Login(){
         console.log(res.data);
            // แจ้งเตือน alert
         roleBaseRedirect(res.data.payload.user.role);         // เช็คถ้าเป็น role ไหนให้ไปหน้านั้น โดยใช้ข้อมูลจาก res
-        toast(res.data.payload.user.name + " Login Success");
+        toast(" Login Success");
         // redux
         dispatch({
           type: "LOGIN",

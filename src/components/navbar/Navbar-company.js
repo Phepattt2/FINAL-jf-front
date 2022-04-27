@@ -14,7 +14,7 @@ const navigation = [
   { name: "สร้างโพสต์", link: "/postjob", current: false },
   { name: "ใบสมัคร", link: "/applicantcompany", current: false },
   { name: "ประวัติการโพสต์", link: "/companypost", current: false },
-  // { name: "ติดต่อสอบถาม", link: "#", current: false }, /* ติดต่อสอบถามในบริษัทดูเเน่นไป เลยลิ้งที่ footer เเทนนะ ส่วนในของนศ.ใส่ปกติ */
+  { name: "ติดต่อสอบถาม", link: "/contactcompany", current: false },
 ];
 
 function classNames(...classes) {

@@ -54,13 +54,14 @@ export default function Postjob(){
 
   const isNumberInput =(e)=>{
       var char = String.fromCharCode(e.which)
+      
       if(!(/[0-9]/.test(char))){
         alert('Please Enter Number')
         e.preventDefault()
       }
     }
-  
-    function disall(e) {
+
+  function disall(e) {
       setDisButton(!disButton)
       console.log('disbutton',disButton)
     }
@@ -88,7 +89,7 @@ export default function Postjob(){
     const d =  Date.now()
       console.log(e.target.name ,e.target.value )
        if(e.target.name === 'postExpireIn' ){
-        let addtime = e.target.value*36
+        let addtime = e.target.value*3600000
         let settime = addtime+d
         const exp = new Date(settime)
         setPost({
@@ -420,7 +421,9 @@ export default function Postjob(){
                 </Typography>
                 <input name = 'wageMin' type="number"
                 className="text-black text-sm rounded-lg ring-2 ring-black focus:ring-black-500 focus:border-black-500 block w-[80px] p-2.5"
-                placeholder="ต่ำสุด" required  disabled={disButton===true}  onChange={handleChange} onKeyPress = {isNumberInput} ></input>
+                placeholder="ต่ำสุด" required  disabled={disButton===true}  onChange={handleChange} onKeyPress = {isNumberInput} 
+                min = '1'
+                ></input>
                 <Typography variant="body2">
                         -
                 </Typography>
@@ -429,7 +432,9 @@ export default function Postjob(){
                 placeholder="สูงสุด" required  
                 disabled={disButton===true}  
                 onChange={handleChange} 
-                onKeyPress = {isNumberInput}></input>
+                onKeyPress = {isNumberInput}
+                min = {postdata.wageMin}
+                ></input>
                 </div>
                 
               </div>
@@ -445,7 +450,10 @@ export default function Postjob(){
                 className="text-black text-sm rounded-lg ring-2 ring-black focus:ring-black-500 focus:border-black-500 block w-[80px] p-2.5"
                 placeholder="จำนวน" required  disabled={disButton===true}  
                 onChange={handleChange} 
-                onKeyPress = {isNumberInput}></input>
+                onKeyPress = {isNumberInput}
+                min = "1"
+                >  
+                </input>
                 
                 </div>
 
@@ -527,7 +535,7 @@ export default function Postjob(){
             <div className="flex items-center justify-center">
             <button
               class="bg-[#24AB82] drop-shadow-md font-bold text-white text-2xl rounded-xl px-6 py-2.5 mt-5 mb-4 hover:bg-[#1F795E] hover:ring-2 hover:ring-white focus:ring-2 focus:ring-white focus:outline-none " 
-              disabled={disButton===true}  
+              disabled= {disButton===true }   
             >
               <Link to ={`/paymentcompany/?id=${recivePost._id}`} className= "text-white text-decoration-none"    >
               <Typography variant="body1">
