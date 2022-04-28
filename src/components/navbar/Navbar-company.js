@@ -11,7 +11,6 @@ import { Link } from  'react-router-dom';
 const navigation = [
   { name: "หน้าหลัก", link: "/homecompany", current: false },
   { name: "ค้นหางาน", link: "/search", current: false },
-  { name: "สร้างโพสต์", link: "/postjob", current: false },
   { name: "ใบสมัคร", link: "/applicantcompany", current: false },
   { name: "ประวัติการโพสต์", link: "/companypost", current: false },
   { name: "ติดต่อสอบถาม", link: "/contactcompany", current: false },

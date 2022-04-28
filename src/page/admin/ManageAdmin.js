@@ -12,17 +12,23 @@ import {
   changeEnable, 
   removePost
 } from "../../api/post";
+import axios from "axios";
 
 const ManageAdmin = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [post, setPost] = useState([]);
 
-
+  async function fetchfirstdata(authtoken) {
+    await  axios.get(process.env.REACT_APP_API+'/posts/adget/xx',{headers:{'authorization':`Bearer ${user.token}`}}).then((res)=>{setPost(res.data)
+      console.log(res.data)
+    })
+  }
 
   console.log("data in useState", post);
   useEffect(() => {
     //code
-    loadPost(user.token);
+    fetchfirstdata(user.token);
+    //loadPost(user.token);
   }, []);
 
   // load ข้อมูลมาใส่ใน state [post,setPost]
@@ -48,7 +54,8 @@ const ManageAdmin = () => {
     changeEnable(user.token, value)
       .then((res) => {
         console.log("Enable Changed", res); // แสดงข้อมูลโพสที่ถูก change enable ไป
-        loadPost(user.token); // เรียกใช้ loadData เพื่อเอาข้อมูลล่าสุดของโพสทั้งหมด หลังจากเปลี่ยนแปลง
+        fetchfirstdata(user.token)
+        //loadPost(user.token); // เรียกใช้ loadData เพื่อเอาข้อมูลล่าสุดของโพสทั้งหมด หลังจากเปลี่ยนแปลง
       })
       .catch((err) => {
         console.log(err.response);
@@ -75,7 +82,8 @@ const ManageAdmin = () => {
       removePost(user.token, id)
         .then((res) => {
           console.log(res);
-          loadPost(user.token);
+          fetchfirstdata(user.token)
+          //loadPost(user.token);
         })
         .catch((err) => {
           console.log(err.response);

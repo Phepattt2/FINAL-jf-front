@@ -10,7 +10,6 @@ const API_COLLEGE = 'https://raw.githubusercontent.com/MicroBenz/thai-university
 
 function ProfileCompany() {
   const { user } = useSelector((state) => ({ ...state }));
-  
   const [provinces,setProvice] = useState([]) 
   const [colleges,setCollege] = useState([]) 
   const [values, setValues] = useState({
@@ -21,8 +20,8 @@ function ProfileCompany() {
     business: "",
     details: "",
     benefit: "",
-    img: "",
-    editable: true,
+    img: null,
+    editable: false,
   });
 
   async function fetchProvincesName(){  
@@ -55,6 +54,12 @@ function ProfileCompany() {
   };
 
   const handleSubmit = (e) => {
+    console.log("proIm isL",values.img)
+    if (values.img === null || values.img === ''){
+        alert('please upload profile image')
+    }
+    else {
+      console.log('valingis:',values.img)
     alert("Saved");
     e.preventDefault();
     setValues({
@@ -70,13 +75,24 @@ function ProfileCompany() {
         console.log(err.response.data);
         loadData(user.token);
       });
-  };
+
+  };}
 
   const handleEdit = (e) => {
-    alert("Change");
-    setValues({
-      editable: true,
+    if(values.editable){
+      alert("ปิดการเเก้ไขข้อมูลโปรไฟล์")
+    }
+    else{
+      alert("เปิดการเเก้ไขข้อมูลโปรไฟล์")
+    }
+    setValues({...values,
+      editable: !values.editable,
+      img:values.img,
+      transcript:values.transcript
     });
+    console.log('editable inside',values.editable)
+    console.log('img profile inside',values.img)
+
   };
 
   const handleChange = (e) => {
@@ -142,9 +158,8 @@ function ProfileCompany() {
         <div className="flex justify-center">
           <img
             className="h-36 w-36"
-            required
             img
-            src={values.img === "" ? Profile : values.img}
+            src={values.img === null ? Profile : values.img}
             alt="profile"
 
             // รูปภาพ
@@ -152,6 +167,7 @@ function ProfileCompany() {
         </div>
         <div className="flex justify-center w-64 mx-72" >
         <MyFileBase64
+                            disabled={values.editable === false }                           
                             mutiple = {false} 
                             onDone = {({base64})=>setValues ({...values,
                             img:base64})} 
@@ -308,9 +324,8 @@ function ProfileCompany() {
         <div className="m-4">
           <div className="flex space-x-12 justify-center mt-4 ">
             <button
-              onClick={(e) => {
-                handleEdit(e);
-              }}
+              onClick={handleEdit}
+              
               type="button"
               className="inline-block px-7 py-3 bg-[#da3d3d] text-white text-md font-bold  leading-tight uppercase rounded shadow-md  hover:shadow-lg  focus:shadow-lg focus:outline-none  hover:bg-[#a12727]  hover:ring-2 hover:ring-white active:shadow-lg transition duration-150 ease-in-out"
               id="change"
@@ -322,7 +337,7 @@ function ProfileCompany() {
             >
               <button
                 className="inline-block px-7 py-3 bg-[#24AB82] text-white text-md font-bold leading-tight uppercase rounded shadow-md  hover:shadow-lg  focus:shadow-lg focus:outline-none  hover:bg-[#1F795E] hover:ring-2 hover:ring-white active:shadow-lg transition duration-150 ease-in-out"
-                id="submit"
+                id="submit"  disabled={values.editable === false  } 
               >
                 ตกลง
               </button>

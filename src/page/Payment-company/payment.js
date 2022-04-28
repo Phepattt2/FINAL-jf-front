@@ -185,7 +185,7 @@ export default function Paymentcompany(){
                 </div>
             <div class="flex flex-col space-y-7 mt-48">
             <div className="w-full h-10 bg-white rounded-lg shadow-sm text-center">
-                    <input type="text" name = 'payname' onChange= { handleChange } 
+                    <input type="text" name = 'payname' onChange= { handleChange } require
                     // onKeyPress = {isCharInput}
                         className="text-black text-center text-sm rounded-lg ring-2 ring-black focus:ring-black-500 focus:border-black-500 block w-full p-2.5"
                         placeholder="สมหญิง เหนี่ยวไกล">
@@ -193,7 +193,7 @@ export default function Paymentcompany(){
                         </div>
 
                     <div className="w-full h-10 bg-white rounded-lg shadow-sm text-center">
-                    <input type="text" name = 'paydate'  onChange= { handleChange }
+                    <input type="text" name = 'paydate'  onChange= { handleChange }require
                         className="text-black text-center text-sm rounded-lg ring-2 ring-black focus:ring-black-500 focus:border-black-500 block w-full p-2.5"
                         placeholder="01/12/2022">
                     </input>
@@ -201,6 +201,7 @@ export default function Paymentcompany(){
 
                     <div className="h-10">
                     <MyFileBase64
+                        require
                         mutiple={false}
                         onDone={({ base64 }) => setValue({ ...value, slipimg: base64 })}/>
                         </div>
@@ -211,7 +212,7 @@ export default function Paymentcompany(){
             <div className="absolute right-10 bottom-2">
             <button
               class="bg-[#24AB82] drop-shadow-md font-bold text-white text-2xl rounded-xl px-6 py-2.5 mt-5 mb-4 hover:bg-[#1F795E] hover:ring-2 hover:ring-white focus:ring-2 focus:ring-white focus:outline-none "
-            onClick={handleClick}
+            onClick={handleClick} disabled = {value.paydate===''||value.payname===''||value.slipimg===''||value.slipimg===null}
             >
               <Typography variant="body1">
               ชำระเงิน

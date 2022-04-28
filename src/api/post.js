@@ -2,6 +2,7 @@ import axios from "axios";
 
 // Admin
 export const listPost = async (authtoken) => {
+  console.log('listpost work')
   return await axios.get("http://localhost:5000/posts/all", {
     // get all post
     headers: {
@@ -10,7 +11,9 @@ export const listPost = async (authtoken) => {
   });
 };
 
+
 export const getmyPosts = async (authtoken) => {
+  console.log('getmyposts work')
   return await axios.get("http://localhost:5000/posts", {
     // get all post
     headers: {

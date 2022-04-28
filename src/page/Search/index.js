@@ -9,6 +9,8 @@ import "./Searchresult.css";
 import Salary from "../../assets/pics/Salary.png";
 import { Link } from "react-router-dom";
 import LoadingCard from "../../components/routes/LoadingCard";
+import { useSelector } from "react-redux";
+
 const API_PROVINCE = 'https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json'
 const API_COLLEGE = 'https://raw.githubusercontent.com/MicroBenz/thai-university-database/master/dist/universities-pretty.json'
 
@@ -17,6 +19,7 @@ const API_COLLEGE = 'https://raw.githubusercontent.com/MicroBenz/thai-university
 
 /* Pagination */
 function Send_data() {
+  const { user } = useSelector((state) => ({ ...state }));
 
 /*จัดเรียงชื่อมหาลัย คณะ สาขา */
   /*คณะ */
@@ -163,12 +166,30 @@ function Send_data() {
 
   const [colleges,setCollege] = useState([])
   const [provinces,setProvice] = useState([]) 
- 
   const [loading, setLoading] = useState([false])
 
   var temp1 = [] 
   var temp2 = [] 
 
+  async function hdClick() {
+    console.log(' home user id is :', user.id)
+    var resUser
+    await axios.get(process.env.REACT_APP_API + `/users/get-user`, { headers: { 'authorization': `Bearer ${user.token}` } })
+      .then((res) => {
+        console.log('user res is ::::',res.data)
+
+        // console.log('user data is :', res.data)
+        // console.log('user data name is :', res.data.name)
+        // console.log('user data phone is :', res.data.phone)
+        // console.log('user data business is :', res.data.business)
+        if (!res.data.name || !res.data.college || !res.data.faculty || !res.data.program || !res.data.phone || !res.data.transcript ) {
+          alert('Please edit your profile data')
+          window.location.replace('/search')
+          }
+       
+      })
+  }
+    
   async function fetchFirstJsonData(){  
     setLoading(true);
     const response = await  axios.post(process.env.REACT_APP_API+'/search')
@@ -176,8 +197,6 @@ function Send_data() {
     .then((res) => {
     JsonData = res.data
            //////// **********
-    
-
     })
     console.log('fetch first')
     const boosted = await axios.post(process.env.REACT_APP_API+'/search',{'boost':true , 'enable': true})
@@ -209,6 +228,7 @@ function Send_data() {
     const data = await response.json() 
     setProvice(data)
   }
+
   useEffect(()=> {
     fetchCollegesName()
     fetchProvincesName()
@@ -297,7 +317,7 @@ function Send_data() {
     .map((users, index) => {
       return (
         // เพิ่มให้คลืกไม่ได้ถ้าไมใช้ role student จะได้ไม่ค้องทำหน้าสมัครงานเพิ่ม
-        <Link to={`/applyjob/?id=${users._id}`} class="text-decoration-none">
+        <Link to={`/applyjob/?id=${users._id}`} class="text-decoration-none" onClick={hdClick} > 
           <div className="">
             {/* ผลการค้นหา ที่เเสดง card ออกมาเป็นบล็อคๆ*/}
             <div className="w-3/4 w-100 h-55 rounded-xl bg-white drop-shadow-md p-2 my-4 font-sans">

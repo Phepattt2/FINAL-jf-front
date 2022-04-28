@@ -19,10 +19,6 @@ const navigation = [
   { name: 'ติดต่อสอบถาม', link: '/contactstudent', current: false },
 ]
 
-
-
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }

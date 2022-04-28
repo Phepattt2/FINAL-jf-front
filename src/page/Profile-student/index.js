@@ -24,26 +24,30 @@ function ProfileStudent() {
     faculty: "",
     program: "",
     transcript: "",
-    img: "",
-    editable: true,
+    img: null,
+    editable: false,
   });
+  const it = document.createElement('it');
 
   async function fetchProvincesName(){  
     const response = await fetch(API_PROVINCE)
     const data = await response.json() 
     setProvice(data)
   }
+
   async function fetchCollegesName(){  
     const response = await fetch(API_COLLEGE)
     const data = await response.json() 
     setCollege(data)
   }
 
-  useEffect(() => {
-    fetchProvincesName()
+    useEffect(() => {
+  
+      fetchProvincesName()
     fetchCollegesName()
     loadData(user.token)
-    }, []);
+  
+  }, []);
   
     const loadData = (authtoken) => {
  
@@ -60,12 +64,20 @@ function ProfileStudent() {
     };
 
 
-
   const handleSubmit = (e) => {
+    console.log("proIm isL",values.img)
+    if (values.img === null || values.img === '' || values.transcript === '' || values.transcript === null){
+        alert('please upload profile image or transcript')
+    }
+    else{
     alert("Saved");
     e.preventDefault();
     setValues({
       editable: false,
+      img:values.img,
+      transcript:values.transcript
+
+
     });
 
     console.log(values.resume)
@@ -78,16 +90,25 @@ function ProfileStudent() {
         console.log(err);
         loadData(user.token);
       });
-  };
+  };}
 
-  const handleEdit = (e) => {
-    alert("Change");
-    setValues({
-      editable: true,
+
+ const handleEdit = (e) => {
+    if(values.editable){
+      alert("ปิดการเเก้ไขข้อมูลโปรไฟล์")
+    }
+    else{
+      alert("เปิดการเเก้ไขข้อมูลโปรไฟล์")
+    }
+    setValues({...values,
+      editable: !values.editable,
+      img:values.img,
+      transcript:values.transcript
     });
+    console.log('editable inside',values.editable)
+    console.log('img profile inside',values.img)
 
   };
-
   const handleChange = (e) => {
     setValues({ ...values, 
       [e.target.name]: e.target.value });
@@ -190,7 +211,8 @@ function ProfileStudent() {
     "สังคมศาสตร์",
     "สังคมสงเคราะห์ศาสตร์",
   ].sort();
-
+  
+  console.log('editable outside is ',values.editable)
   return (
     <div className="mx-80 my-20 bg-gray-200 shadow  rounded-lg font-sans">
       <div className=" h-20 w-200  bg-green-300  shadow  rounded-lg">
@@ -206,14 +228,16 @@ function ProfileStudent() {
           <img
             className="h-36 w-36"
             img
-            src={values.img === "" ? Profile : values.img}
+            src={values.img === null ? Profile : values.img}
             alt="profile"
             // รูปภาพ
           />
         </div>
         <div className="flex justify-center w-64 mx-72">
         <MyFileBase64
-                            required
+                           
+                            name = {it}
+                            disabled={values.editable === false}
                             mutiple = {false} 
                             onDone = {({base64})=>setValues ({...values,
                             img:base64})} 
@@ -386,34 +410,29 @@ function ProfileStudent() {
             ใบทรานสคริปต์ *
           </label>
             
-          <div className="flex justify-left w-72" required>
-          <MyFileBase64 
+          <div className="flex justify-left w-72" >
+          <MyFileBase64    id = 'trans'
+          disabled={values.editable === false}
                             mutiple = {false} 
                             onDone = {({base64})=>setValues ({...values,
                             transcript:base64})} />
           
           </div>
           <div className="flex space-x-12 justify-center mt-4 ">
-            <button
-              onClick={(e) => {
-                handleEdit(e);
-              }}
+            <button 
+              onClick = {handleEdit}
               type="button"
               className="inline-block px-7 py-3 bg-[#da3d3d] text-white text-md font-bold  leading-tight uppercase rounded shadow-md  hover:shadow-lg  focus:shadow-lg focus:outline-none  hover:bg-[#a12727]  hover:ring-2 hover:ring-white active:shadow-lg transition duration-150 ease-in-out"
               id="change"
             >
-              แก้ไข
+              แก้ไข{values.editable}
             </button>
-            <a
-            // path กดตกลง
-            >
               <button
                 className="inline-block px-7 py-3 bg-[#24AB82] text-white text-md font-bold leading-tight uppercase rounded shadow-md  hover:shadow-lg  focus:shadow-lg focus:outline-none  hover:bg-[#1F795E] hover:ring-2 hover:ring-white active:shadow-lg transition duration-150 ease-in-out"
-                id="submit"
+                id="submit" disabled={values.editable === false}
               >
                 ตกลง
               </button>
-            </a>
           </div>
           <div className="h-10 w-200 bg-gray-200   rounded-lg "></div>
         </div>

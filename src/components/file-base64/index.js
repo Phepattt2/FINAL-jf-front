@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FileBase64({ multiple, onDone }) {
+export default function FileBase64({ multiple, onDone ,disabled , a ,name,click}) {
   const handleChange = (e) => {
     // get the files
     let files = e.target.files;
@@ -39,15 +39,21 @@ export default function FileBase64({ multiple, onDone }) {
       }; // reader.onload
     } // for
   };
+  
   return (
     <input
       className="form-control block w-full text-base font-normal text-gray-700 bg-white 
       bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out mt-3 mb-4 
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       type="file"
+      id = {a}
+      require
       onChange={handleChange}
       multiple={multiple}
-      required
-    />
+      name = {name}
+      disabled = {disabled}
+      onClick = {click}
+    >
+      </input>
   );
 }
