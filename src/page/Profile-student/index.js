@@ -76,8 +76,6 @@ function ProfileStudent() {
       editable: false,
       img:values.img,
       transcript:values.transcript
-
-
     });
 
     console.log(values.resume)
