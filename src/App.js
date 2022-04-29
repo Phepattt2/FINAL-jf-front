@@ -93,9 +93,9 @@ function App() {
         <Route
           path="/admin/manage"
           element={
-            // <AdminRoute>
+            <AdminRoute>
               <ManageAdmin />
-            // </AdminRoute>
+            </AdminRoute>
           }
         />
 

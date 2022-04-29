@@ -97,7 +97,7 @@ const CompanyPost = () => {
                   {index+1} {/* No. */}
                 </th>
                 <td className="px-6 py-4 m-4">
-                <img className="h-6 w-6" src={item.enabled ? Green : Yellow}></img>
+                <img className="h-6 w-6" src={item.enable ? Green : Yellow}></img>
                   {/* สถานะ */}
                 </td>
                 <td className="px-6 py-4">{item.position}</td>  {/* ตำแหน่ง */}

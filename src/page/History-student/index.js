@@ -121,7 +121,7 @@ const HistoryStudent = () => {
                   />
                   {/* ที่อยู่ address บริษัท */}
                   <div className="px-0.5 py-1.5  focus:outline-none ml-2 text-black text-sm">
-                    {item.company.companyAddress}
+                    {item.company.address}
                   </div>
                 </div>
 
@@ -129,7 +129,7 @@ const HistoryStudent = () => {
                   <div className="w-28 h-28 rounded-xl bg-[#E2E2E2] ">
                     {/* logo company */}
                     <img
-                      src={Company1} //ลองใส่รูปไปก่อน รอดึง logo จากหลังบ้าน
+                      src={item.company.img} //ลองใส่รูปไปก่อน รอดึง logo จากหลังบ้าน
                       alt="logoCompany"
                       span="location"
                     />
